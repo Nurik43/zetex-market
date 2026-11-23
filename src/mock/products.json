@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Смартфон Xiaomi Redmi Note 13 8/256 GB",
+    "rating": 4.9,
+    "reviews": 124,
+    "price": 2500000,
+    "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "292 000 сум/мес",
+    "category": "Электроника",
+    "badge": "Хит"
+  },
+  {
+    "id": 2,
+    "title": "Худи оверсайз унисекс зимнее с начесом",
+    "rating": 4.7,
+    "reviews": 45,
+    "price": 189000,
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "22 000 сум/мес",
+    "category": "Одежда",
+    "badge": "Распродажа"
+  },
+  {
+    "id": 3,
+    "title": "Беспроводные наушники Apple AirPods 3",
+    "rating": 5.0,
+    "reviews": 310,
+    "price": 2100000,
+    "image": "https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "245 000 сум/мес",
+    "category": "Электроника",
+    "badge": "0-0-12"
+  },
+  {
+    "id": 4,
+    "title": "Кроссовки спортивные демисезонные Nike Air",
+    "rating": 4.5,
+    "reviews": 18,
+    "price": 299000,
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "35 000 сум/мес",
+    "category": "Обувь",
+    "badge": "Акция"
+  },
+  {
+    "id": 5,
+    "title": "Умные часы Apple Watch Series 9 GPS",
+    "rating": 4.9,
+    "reviews": 85,
+    "price": 4900000,
+    "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "571 000 сум/мес",
+    "category": "Электроника",
+    "badge": "Хит"
+  },
+  {
+    "id": 6,
+    "title": "Увлажняющий крем для лица NIVEA Care",
+    "rating": 4.8,
+    "reviews": 540,
+    "price": 45000,
+    "image": "https://images.unsplash.com/photo-1556229174-5e42a09e45af?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "5 000 сум/мес",
+    "category": "Красота",
+    "badge": "Акция"
+  },
+  {
+    "id": 7,
+    "title": "Спортивная бутылка для воды матовая 1л",
+    "rating": 4.6,
+    "reviews": 92,
+    "price": 39000,
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "4 500 сум/мес",
+    "category": "Спорт",
+    "badge": ""
+  },
+  {
+    "id": 8,
+    "title": "Футболка базовая хлопковая белая",
+    "rating": 4.8,
+    "reviews": 115,
+    "price": 69000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "8 000 сум/мес",
+    "category": "Одежда",
+    "badge": "Скидка"
+  },
+  {
+    "id": 9,
+    "title": "Игровой кубик Рубика 3х3 скоростной",
+    "rating": 4.9,
+    "reviews": 240,
+    "price": 25000,
+    "image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "3 000 сум/мес",
+    "category": "Игрушки",
+    "badge": ""
+  },
+  {
+    "id": 10,
+    "title": "Сыворотка для лица с витамином C",
+    "rating": 4.7,
+    "reviews": 68,
+    "price": 120000,
+    "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "14 000 сум/мес",
+    "category": "Красота",
+    "badge": "Новинка"
+  },
+  {
+    "id": 11,
+    "title": "Коврик для йоги и фитнеса нескользящий",
+    "rating": 4.4,
+    "reviews": 34,
+    "price": 145000,
+    "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "17 000 сум/мес",
+    "category": "Спорт",
+    "badge": "Скидка"
+  },
+  {
+    "id": 12,
+    "title": "Портативная колонка JBL Flip 6",
+    "rating": 5.0,
+    "reviews": 198,
+    "price": 1350000,
+    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=400&auto=format&fit=crop",
+    "monthlyPrice": "158 000 сум/мес",
+    "category": "Электроника",
+    "badge": "Хит"
+  }
+]

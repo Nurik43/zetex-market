@@ -1,0 +1,46 @@
+/* Оплата заказа */
+.ztx-pay-card { max-width: 520px; margin: 24px auto 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; box-shadow: 0 2px 10px var(--shadow); }
+.ztx-pay-card h1 { margin: 0; font-size: 24px; letter-spacing: -0.02em; }
+.ztx-pay-card p { margin: 0; color: var(--ink-2); line-height: 1.5; }
+.ztx-pay-icon { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); color: var(--ink-2); }
+.ztx-pay-card.ok .ztx-pay-icon { background: var(--accent-tint); color: var(--accent); }
+.ztx-pay-card.info .ztx-pay-icon { background: var(--brand-tint); color: var(--brand); }
+.ztx-pay-card.warn .ztx-pay-icon { background: var(--warn-tint); color: var(--warn-ink); }
+.ztx-pay-card.danger .ztx-pay-icon { background: var(--danger-tint); color: var(--danger); }
+.ztx-pay-muted { color: var(--ink-2); text-align: center; padding: 32px 0; }
+.ztx-pay-sum { width: 100%; margin: 0; display: grid; gap: 8px; text-align: left; }
+.ztx-pay-sum > div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; background: var(--soft); border-radius: 12px; }
+.ztx-pay-sum dt { color: var(--ink-2); }
+.ztx-pay-sum dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; text-align: right; }
+.ztx-pay-sum b { font-size: 18px; }
+.ztx-pay-hold { padding: 10px 14px; border-radius: 12px; background: var(--warn-tint); color: var(--warn-ink) !important; font-size: 14px; }
+.ztx-pay-demo { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ztx-pay-demo p { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.ztx-pay-err { color: var(--danger) !important; }
+.ztx-pay-go { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+.ztx-pay-demo .ztx-btn, .ztx-pay-go { width: 100%; box-sizing: border-box; }
+.ztx-pay-demo .ztx-btn:disabled { opacity: .6; cursor: wait; }
+.ztx-pay-note { font-size: 13px; color: var(--ink-3) !important; }
+.ztx-pay-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
+.ztx-pay-ghost { background: var(--soft); color: var(--ink); }
+.ztx-pay-ghost:hover { background: var(--line); }
+.ztx-pay-card .ztx-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+@media (max-width: 420px) {
+  .ztx-pay-card { padding: 22px 16px; margin-top: 8px; }
+  .ztx-pay-actions .ztx-btn { flex: 1 1 100%; }
+}
+
+/* Формы ссылок из писем */
+.ztx-auth-form { width: 100%; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+.ztx-auth-form label { display: flex; flex-direction: column; gap: 6px; }
+.ztx-auth-form label > span { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.ztx-auth-form input { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; font-size: 15px; }
+.ztx-auth-form input:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.ztx-auth-form input[aria-invalid="true"] { border-color: var(--danger); }
+.ztx-auth-form small { color: var(--ink-3); font-size: 12px; }
+.ztx-auth-form .ztx-pay-err { font-size: 13px; min-height: 0; }
+.ztx-auth-form .ztx-btn { margin-top: 6px; }
+.ztx-auth-form .ztx-btn:disabled { opacity: .6; cursor: wait; }
+.ztx-auth-spin { animation: ztxAuthSpin 1s linear infinite; }
+@keyframes ztxAuthSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ztx-auth-spin { animation: none; } }

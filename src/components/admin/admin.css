@@ -1,0 +1,174 @@
+/* Админ-панель. Только переменные темы — тёмная тема работает автоматически. */
+.ztx-admin { max-width: 1240px; margin: 30px auto; padding: 0 16px 40px; color: var(--ink); }
+.ztx-admin h1 { font-size: 28px; font-weight: 900; margin: 0 0 4px; }
+.ztx-admin h3 { margin: 0; font-size: 17px; font-weight: 700; }
+.ztx-admin-head { margin-bottom: 20px; }
+.ztx-admin-muted { color: var(--ink-3); font-size: 13px; margin: 0; }
+.ztx-admin-main { font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+.ztx-admin-mono { font-family: ui-monospace, Menlo, Consolas, monospace; letter-spacing: .03em; }
+.ztx-admin-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ztx-admin-stack { display: flex; flex-direction: column; gap: 20px; }
+
+/* вкладки */
+.ztx-admin-tabs { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 20px; scrollbar-width: thin; }
+.ztx-admin-tab { flex: none; display: flex; align-items: center; gap: 7px; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; padding: 12px 14px; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.ztx-admin-tab:hover { color: var(--ink); }
+.ztx-admin-tab[aria-selected="true"] { color: var(--brand); border-bottom-color: var(--brand); }
+.ztx-admin-tab:focus-visible, .ztx-admin-btn:focus-visible, .ztx-admin-select:focus-visible, .ztx-admin-input:focus-visible, .ztx-admin-chart svg:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* кнопки и поля */
+.ztx-admin-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 12px; min-height: 36px; border-radius: 10px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); white-space: nowrap; }
+.ztx-admin-btn:hover:not(:disabled) { background: var(--soft); }
+.ztx-admin-btn:disabled { opacity: .55; cursor: not-allowed; }
+.ztx-admin-btn.is-icon { padding: 8px; min-width: 36px; }
+.ztx-admin-btn.is-primary { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+.ztx-admin-btn.is-primary:hover:not(:disabled) { background: var(--brand-deep); border-color: var(--brand-deep); }
+.ztx-admin-btn.is-danger { color: var(--danger); border-color: var(--danger-line); }
+.ztx-admin-btn.is-danger:hover:not(:disabled) { background: var(--danger-tint); }
+.ztx-admin-btn.is-danger-solid { background: var(--danger); border-color: var(--danger); color: var(--on-brand); }
+.ztx-admin-select, .ztx-admin-input, .ztx-admin-search { font: inherit; font-size: 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--surface); color: var(--ink); }
+.ztx-admin-select, .ztx-admin-input { padding: 9px 12px; min-height: 40px; max-width: 100%; }
+.ztx-admin-input { width: 100%; }
+.ztx-admin-toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.ztx-admin-search { display: flex; align-items: center; gap: 8px; padding: 0 12px; flex: 1 1 240px; min-height: 40px; color: var(--ink-3); }
+.ztx-admin-search:focus-within { outline: 2px solid var(--brand); outline-offset: 2px; }
+.ztx-admin-search input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--ink); outline: none; }
+
+/* бейджи */
+.ztx-admin-badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 6px; font-size: 12px; font-weight: 700; white-space: nowrap; background: var(--soft); color: var(--ink-2); }
+.ztx-admin-badge.is-brand { background: var(--brand-tint); color: var(--brand); }
+.ztx-admin-badge.is-ok { background: var(--accent-tint); color: var(--accent); }
+.ztx-admin-badge.is-warn { background: var(--warn-tint); color: var(--warn-ink); }
+.ztx-admin-badge.is-danger { background: var(--danger-tint); color: var(--danger); }
+
+/* карточки */
+.ztx-admin-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.ztx-admin-card-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.ztx-admin-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.ztx-admin-stat { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.ztx-admin-stat-icon { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--brand-tint); color: var(--brand); }
+.ztx-admin-stat.is-warn .ztx-admin-stat-icon { background: var(--warn-tint); color: var(--warn-ink); }
+.ztx-admin-stat.is-danger .ztx-admin-stat-icon { background: var(--danger-tint); color: var(--danger); }
+.ztx-admin-stat-val { font-size: 22px; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.ztx-admin-stat-label { font-size: 13px; color: var(--ink-2); }
+.ztx-admin-stat-sub { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.ztx-admin-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.ztx-admin-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 10px; }
+
+/* график */
+.ztx-admin-chart { position: relative; width: 100%; }
+.ztx-admin-chart svg { display: block; max-width: 100%; touch-action: pan-y; border-radius: 8px; }
+.ztx-admin-grid { stroke: var(--line); stroke-width: 1; }
+.ztx-admin-axis { fill: var(--ink-3); font-size: 11px; }
+.ztx-admin-area { fill: var(--brand-tint); opacity: .8; }
+.ztx-admin-line { fill: none; stroke: var(--brand); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.ztx-admin-cross { stroke: var(--ink-3); stroke-dasharray: 3 3; }
+.ztx-admin-dot { fill: var(--brand); stroke: var(--surface); stroke-width: 2; }
+.ztx-admin-tip { position: absolute; top: 4px; transform: translateX(-50%); display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; background: var(--surface); color: var(--ink); border: 1px solid var(--line-2); border-radius: 10px; box-shadow: 0 4px 14px var(--shadow); font-size: 12px; pointer-events: none; white-space: nowrap; }
+.ztx-admin-chart-note { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--ink-3); font-size: 13px; pointer-events: none; }
+.ztx-admin-chart-table { max-height: 320px; overflow-y: auto; }
+
+/* таблицы */
+.ztx-admin-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.ztx-admin-card .ztx-admin-scroll { border: 0; border-radius: 0; }
+.ztx-admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+.ztx-admin-table th { background: var(--soft); color: var(--ink-2); font-size: 13px; font-weight: 600; padding: 12px 14px; white-space: nowrap; }
+.ztx-admin-table td { padding: 12px 14px; border-bottom: 1px solid var(--soft); vertical-align: middle; }
+.ztx-admin-table tr:last-child td { border-bottom: 0; }
+.ztx-admin-table .is-num { text-align: right; font-variant-numeric: tabular-nums; }
+.ztx-admin-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; align-items: center; }
+td.ztx-admin-actions { display: table-cell; text-align: right; white-space: nowrap; }
+td.ztx-admin-actions > * { margin-left: 6px; }
+.ztx-admin-prod { display: flex; align-items: center; gap: 10px; min-width: 180px; }
+.ztx-admin-prod img, .ztx-admin-item > img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--soft); flex: none; }
+
+/* списки (жалобы, отзывы) */
+.ztx-admin-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ztx-admin-item { display: flex; gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; font-size: 14px; }
+.ztx-admin-item-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; overflow-wrap: anywhere; }
+.ztx-admin-item-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ztx-admin-rating { display: inline-flex; align-items: center; gap: 3px; font-weight: 700; color: var(--warn-ink); }
+.ztx-admin-rating svg { fill: currentColor; }
+
+/* форма промокода */
+.ztx-admin-form { display: flex; flex-direction: column; gap: 14px; }
+.ztx-admin-form .ztx-admin-card-head { margin: 0; }
+.ztx-admin-formgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+.ztx-admin-formgrid label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.ztx-admin-formerr { margin: 0; color: var(--danger); font-size: 13px; font-weight: 500; }
+
+/* состояния */
+.ztx-admin-state { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 20px; color: var(--ink-3); text-align: center; background: var(--surface); border: 1px dashed var(--line-2); border-radius: 16px; }
+.ztx-admin-state p { margin: 0; font-size: 14px; }
+.ztx-admin-state.is-error { color: var(--danger); background: var(--danger-tint); border-color: var(--danger-line); }
+.ztx-admin-skel { display: flex; flex-direction: column; gap: 10px; }
+.ztx-admin-skel-row { height: 52px; border-radius: 12px; background: var(--soft); animation: ztx-admin-pulse 1.2s ease-in-out infinite; }
+@keyframes ztx-admin-pulse { 50% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .ztx-admin-skel-row { animation: none; } }
+.ztx-admin-fading { opacity: .6; transition: opacity .15s; }
+.ztx-admin-total { margin: 10px 2px 0; font-size: 13px; color: var(--ink-3); }
+.ztx-admin-pager { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--ink-2); }
+
+/* диалог */
+.ztx-admin-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: var(--shadow); }
+.ztx-admin-dialog { width: min(420px, 100%); background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 12px 40px var(--shadow); }
+.ztx-admin-dialog h3 { margin-bottom: 8px; }
+.ztx-admin-dialog p { margin: 0 0 18px; color: var(--ink-2); font-size: 14px; overflow-wrap: anywhere; }
+.ztx-admin-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* телефон: таблицы превращаются в карточки */
+@media (max-width: 720px) {
+  .ztx-admin h1 { font-size: 23px; }
+  .ztx-admin-scroll { background: none; border: 0; overflow: visible; overflow-x: clip; position: relative; } /* clip: скрытая шапка таблицы не должна расширять страницу */
+  .ztx-admin-table, .ztx-admin-table tbody, .ztx-admin-table tr, .ztx-admin-table td { display: block; width: 100%; }
+  .ztx-admin-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .ztx-admin-table tr { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px 14px; margin-bottom: 10px; }
+  .ztx-admin-table td { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border: 0; text-align: right !important; }
+  .ztx-admin-table td[data-label]::before { content: attr(data-label); flex: none; color: var(--ink-3); font-size: 12px; font-weight: 600; text-align: left; }
+  .ztx-admin-table td > div { min-width: 0; }
+  td.ztx-admin-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; border-top: 1px solid var(--soft); padding-top: 10px; margin-top: 4px; }
+  td.ztx-admin-actions:empty { display: none; }
+  td.ztx-admin-actions > * { margin: 0; }
+  .ztx-admin-chart-table .ztx-admin-table tr { padding: 6px 12px; }
+  .ztx-admin-item { flex-direction: column; align-items: stretch; }
+  .ztx-admin-item .ztx-admin-actions { justify-content: flex-start; }
+  .ztx-admin-stats { grid-template-columns: 1fr 1fr; }
+  .ztx-admin-stat { padding: 12px; }
+}
+@media (max-width: 400px) { .ztx-admin-stats { grid-template-columns: 1fr; } }
+
+/* поля, панель, массовые действия */
+.ztx-admin-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 12px; }
+.ztx-admin-field textarea { resize: vertical; font-weight: 400; }
+a.ztx-admin-btn { text-decoration: none; }
+.ztx-admin-overlay.is-drawer { place-items: stretch end; padding: 0; }
+.ztx-admin-drawer { width: min(560px, 100%); height: 100%; overflow-y: auto; background: var(--surface); color: var(--ink); border-left: 1px solid var(--line); box-shadow: -12px 0 40px var(--shadow); display: flex; flex-direction: column; }
+.ztx-admin-drawer-head { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 20px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.ztx-admin-drawer-body { padding: 18px 20px 32px; display: flex; flex-direction: column; gap: 18px; }
+.ztx-admin-drawer h4 { margin: 0 0 8px; font-size: 14px; color: var(--ink-2); }
+.ztx-admin-kv { display: grid; grid-template-columns: 140px 1fr; gap: 6px 12px; margin: 0; font-size: 14px; }
+.ztx-admin-kv dt { color: var(--ink-3); } .ztx-admin-kv dd { margin: 0; overflow-wrap: anywhere; }
+.ztx-admin-mini { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ztx-admin-mini td, .ztx-admin-mini th { padding: 6px 4px; border-bottom: 1px solid var(--soft); text-align: left; vertical-align: top; }
+.ztx-admin-mini .is-num { text-align: right; }
+.ztx-admin-timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--line); display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.ztx-admin-bulk { position: sticky; top: 64px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; margin-bottom: 12px; background: var(--brand-tint); border: 1px solid var(--brand); border-radius: 12px; }
+.ztx-admin-check { width: 18px; height: 18px; accent-color: var(--brand); cursor: pointer; }
+.ztx-admin-link { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--ink); text-align: left; cursor: pointer; overflow-wrap: anywhere; }
+.ztx-admin-link:hover { color: var(--brand); text-decoration: underline; }
+.ztx-admin-delta { font-size: 12px; font-weight: 700; } .ztx-admin-delta.up { color: var(--accent); } .ztx-admin-delta.down { color: var(--danger); }
+.ztx-admin-bars { display: flex; align-items: flex-end; gap: 2px; height: 90px; }
+.ztx-admin-bars > span { flex: 1; min-width: 2px; background: var(--brand); border-radius: 2px 2px 0 0; opacity: .85; }
+.ztx-admin-bars > span.alt { background: var(--accent); }
+.ztx-admin-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.ztx-admin-funnel { display: flex; flex-direction: column; gap: 8px; }
+.ztx-admin-funnel > div { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.ztx-admin-funnel i { display: block; height: 14px; border-radius: 7px; background: var(--brand); min-width: 4px; }
+.ztx-admin-chat { display: flex; flex-direction: column; gap: 8px; }
+.ztx-admin-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; background: var(--soft); font-size: 14px; overflow-wrap: anywhere; }
+.ztx-admin-msg.is-seller { align-self: flex-end; background: var(--brand-tint); }
+.ztx-admin-msg small { display: block; color: var(--ink-3); font-size: 11px; margin-top: 2px; }
+.ztx-admin-qr { display: block; width: 180px; height: 180px; background: #fff; border-radius: 8px; padding: 6px; }
+.ztx-admin-subtabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.ztx-admin-subtabs button[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+@media (max-width: 720px) { .ztx-admin-kv { grid-template-columns: 1fr; } .ztx-admin-bulk { top: 56px; } .ztx-admin-table td .ztx-admin-check { margin-left: auto; } }

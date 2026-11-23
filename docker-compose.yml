@@ -1,0 +1,39 @@
+# Запуск: cp .env.example .env  (заполнить)  ->  docker compose up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      TRUST_PROXY: "1"          # за Caddy: реальный IP клиента для лимитов
+      COOKIE_SECURE: "1"        # сайт отдаётся по HTTPS через Caddy
+      APP_URL: "https://${DOMAIN:?Укажите DOMAIN в .env}"
+      CORS_ORIGIN: "https://${DOMAIN}"
+    volumes:
+      - zetex-data:/app/server/data   # SQLite + uploads + .jwt_secret
+    expose:
+      - "3001"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      DOMAIN: ${DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data        # сертификаты Let's Encrypt
+      - caddy-config:/config
+
+volumes:
+  zetex-data:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,16 @@
+/* Подвал */
+.ztx-footer { background: var(--surface); border-top: 1px solid var(--line); margin-top: 60px; padding: 40px 0 20px; }
+.ztx-footer-in { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.ztx-footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; margin-bottom: 32px; }
+.ztx-footer-grid > * { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.ztx-footer h4 { margin: 0; font-size: 15px; font-weight: 700; color: var(--ink); }
+.ztx-footer a, .ztx-footer button { font: inherit; font-size: 14px; color: var(--ink-2); text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; transition: color .15s; }
+.ztx-footer a:hover, .ztx-footer button:hover { color: var(--brand); }
+.ztx-footer-muted { font-size: 13px; color: var(--ink-3); }
+.ztx-footer-social { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.ztx-footer-social a { background: var(--soft); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+.ztx-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 20px; font-size: 13px; color: var(--ink-2); }
+.ztx-footer-legal { display: flex; gap: 8px 20px; flex-wrap: wrap; }
+.ztx-footer-legal a { font-size: 13px; font-weight: 500; }
+.ztx-footer-copy { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
+.ztx-footer-copy svg { color: var(--accent); flex: none; }

@@ -1,0 +1,10 @@
+.ztx-stars { display: inline-flex; gap: 2px; color: var(--warn); vertical-align: middle; line-height: 0; }
+.ztx-stars-cell { position: relative; display: inline-block; }
+.ztx-stars-bg { position: absolute; inset: 0; color: var(--line-2); }
+.ztx-stars-fg { position: absolute; inset: 0 auto 0 0; overflow: hidden; display: block; }
+.ztx-stars-fg svg { display: block; max-width: none; }
+.ztx-stars-input { gap: 4px; }
+.ztx-stars-btn { background: none; border: 0; padding: 4px; border-radius: 8px; cursor: pointer; color: var(--line-2); transition: transform .12s, color .12s; line-height: 0; }
+.ztx-stars-btn.on { color: var(--warn); }
+.ztx-stars-btn:hover { transform: scale(1.12); }
+@media (prefers-reduced-motion: reduce) { .ztx-stars-btn { transition: none; } .ztx-stars-btn:hover { transform: none; } }
