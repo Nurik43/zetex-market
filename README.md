@@ -1,117 +1,127 @@
 # Zetex Market
 
-Маркетплейс (B2C/B2B) для Узбекистана: покупатели, продавцы и администратор. Фронтенд — React + Vite (в корне), бэкенд — Express + встроенный SQLite (`node:sqlite`) в `server/`. В production один Node-процесс отдаёт и API, и собранный фронтенд (`dist/`, SPA fallback).
+Marketplace (B2C/B2B) for Uzbekistan: buyers, sellers and the administrator. The frontend is React + Vite (at the root), the backend is Express + embedded SQLite (`node:sqlite') in `server/'. In production, a single Node process outputs both the API and the assembled frontend (`dist/`, SPA fallback).
 
-## Возможности
+## Features
 
-- Роли: покупатель, продавец, администратор. Регистрация, вход (JWT в cookie), смена и сброс пароля, подтверждение почты.
-- Каталог: 15 категорий с подкатегориями, поиск, фильтры (цена, рейтинг, наличие), сортировка, подсказки поиска, похожие товары.
-- Избранное, отзывы и рейтинги, ответы продавца на отзывы, жалобы на товары.
-- Кабинет продавца: товары (в том числе импорт из CSV), загрузка фото, заказы и смена статусов, статистика и аналитика, собственные промокоды.
-- Заказы: корзина, доставка курьером или самовывоз из пункта выдачи, промокоды, отмена с возвратом остатков, автоотмена неоплаченных онлайн-заказов.
-- Оплата: наличными, Payme, Click, демо-оплата (mock).
-- Админ-панель: статистика, пользователи, модерация товаров, заказы и возвраты, жалобы, отзывы, промокоды.
-- Уведомления: письма (SMTP) и Telegram-бот. Продавцу — о новых заказах, покупателю — о каждом этапе заказа (оформлен, оплачен, подтверждён, в доставке, доставлен, отменён); Telegram привязывается в профиле или кабинете продавца.
-- Корзина хранится на сервере (в аккаунте покупателя), одинакова на всех устройствах; ею пользуются только вошедшие покупатели.
-- Чат покупатель ↔ продавец: вопрос по товару или заказу, список разговоров, значок непрочитанных в шапке, письмо и Telegram-уведомление получателю (при первом непрочитанном в разговоре). Сообщения подтягиваются опросом каждые 4 секунды, без WebSocket.
-- Мои данные: выгрузка всего, что хранится о пользователе (`GET /api/account/export`), и удаление аккаунта по паролю (`POST /api/account/delete`): личные данные стираются, заказы остаются без имени, телефона и адреса; нельзя удалить, пока есть незавершённые заказы, и нельзя удалить администратора.
-- Правовые страницы: пользовательское соглашение, политика конфиденциальности, возврат и обмен, контакты, вопросы и ответы. При регистрации обязательно согласие с условиями (время согласия хранится в `users.terms_accepted_at`).
-- SEO: чистые адреса (`/product/12`, `/catalog?category=…`; старые ссылки `/#/…` перенаправляются), `title`/`description`/canonical/Open Graph и JSON-LD `Product` подставляются сервером в HTML, `sitemap.xml`, `robots.txt`; личные разделы закрыты от индексации, несуществующие страницы и скрытые товары отдают 404.
+- Roles: buyer, seller, administrator. Registration, login (JWT in cookie), password change and reset, email confirmation.
+- Catalog: 15 categories with subcategories, search, filters (price, rating, availability), sorting, search suggestions, similar products.
+- Favorites, reviews and ratings, seller's responses to reviews, complaints about products.
+- Orders: shopping cart, courier delivery or pickup from the pick-up point, promo codes, cancellation with refund of balances, automatic cancellation of unpaid online orders.
+- Payment: cash, Payme, Click, demo payment (mock).
+- Admin panel: statistics, users, product moderation, orders and refunds, complaints, reviews, promo codes.
+- Notifications: emails (SMTP) and Telegram bot. To the seller — about new orders, to the buyer — about each stage of the order (completed, paid, confirmed, in delivery, delivered, canceled); Telegram is linked in the seller's profile or cabinet.
+- The shopping cart is stored on the server (in the buyer's account), it is the same on all devices; it is used only by logged-in customers.
+- Chat buyer ↔ seller: a question about a product or order, a list of conversations, an unread icon in the header, a letter and a Telegram notification to the recipient (at the first unread in the conversation). Messages are pulled up by polling every 4 seconds, without WebSocket.
+- My data: uploading everything that is stored about the user (`GET /api/account/export`) and deleting the account by password (`POST /api/account/delete`): personal data is erased, orders remain without name, phone number and address; cannot be deleted while there are incomplete orders, and the administrator cannot be deleted.
+- Legal pages: user agreement, privacy policy, refund and exchange, contacts, questions and answers. Upon registration, it is mandatory to agree to the terms (the time of consent is stored in `users.terms_accepted_at`).
+- SEO: clean addresses (`/product/12`, `/catalog?category=...`; old links`/#/…`redirected), `title`/`description`/canonical/Open Graph and JSON-LD `Product` are substituted by the server in HTML, `sitemap.xml `, `robots.txt `personal sections are closed from indexing, non-existent pages and hidden goods give 404.
 
-## Быстрый старт (разработка)
+## Quick Start (development)
 
-Нужен Node.js 22.5+.
+A Node is needed.js 22.5+.
 
 ```bash
 npm i
 cd server && npm i && cd ..
-npm run dev:all        # фронт http://localhost:5173 + API http://localhost:3001
+npm run dev:all # front http://localhost:5173 + API http://localhost:3001
 ```
 
-Или по частям: `npm run dev` (фронт), `npm run server` (API). Команда `npm run setup` ставит зависимости обоих проектов. Vite проксирует `/api` и `/uploads` на порт 3001.
+Or in parts: `npm run dev` (front), `npm run server` (API). The `npm run setup` command sets the dependencies of both projects. Vite proxies `/api` and `/uploads` to port 3001.
 
-При первом запуске (вне production) база `server/data/zetex.db` заполняется демо-данными: аккаунты и около 100 товаров. В production демо-данные не создаются; для пробного стенда включите `SEED_DEMO=1`.
+At the first launch (outside of production), the 'server/data/zetex.db` database is filled with demo data: accounts and about 100 products. Demo data is not created in production; enable `SEED_DEMO=1` for the trial stand.
 
-### Демо-аккаунты
+### Demo accounts
 
-| Роль | Почта | Пароль |
+| Role | Email | Password |
 |---|---|---|
-| Покупатель | info@zetex.uz | Password123! |
-| Продавец | seller@zetex.uz | SellerPassword123 |
-| Администратор | admin@zetex.uz | Admin12345! |
+| Buyer | info@zetex.uz | Password123! |
+| Seller | seller@zetex.uz | SellerPassword123 |
+| Admin | admin@zetex.uz | Admin12345! |
 
-Демо-администратор создаётся только вне production. В production задайте `ADMIN_EMAIL` и `ADMIN_PASSWORD`, иначе администратора не будет. Демо-аккаунты покупателя и продавца создаются при пустой базе, в том числе в production: после первого запуска смените их пароли или удалите их.
+A demo administrator is created only outside of production. In production, set `ADMIN_EMAIL` and `ADMIN_PASSWORD`, otherwise there will be no administrator. Demo accounts of the buyer and seller are created with an empty database, including in production: after the first launch, change their passwords or delete them.
 
-## Переменные окружения
+## Environment variables
 
-Полный список с комментариями — в `.env.example`. Ключевые:
+For a complete list with comments, see `.env.example'. Key:
 
-| Переменная | Назначение | По умолчанию |
+| Variable | Assignment | By default |
 |---|---|---|
-| `PORT` | порт сервера | 3001 |
-| `JWT_SECRET` | секрет сессий | генерируется в `data/.jwt_secret` |
-| `JWT_EXPIRES_IN` | срок сессии | 7d |
-| `APP_URL` | публичный адрес сайта | http://localhost:5173 |
-| `CORS_ORIGIN` | разрешённые origin через запятую | localhost:5173 |
-| `TRUST_PROXY`, `COOKIE_SECURE` | работа за прокси / Secure-cookie | включены в production |
-| `TZ_OFFSET_HOURS` | сдвиг часового пояса | 5 |
-| `ADMIN_EMAIL`, `ADMIN_PASSWORD` | учётная запись администратора | демо вне production |
-| `DATA_DIR`, `DB_FILE`, `UPLOAD_DIR`, `DIST_DIR` | пути | `server/data`, `dist` |
-| `SMTP_URL`, `MAIL_FROM`, `REQUIRE_VERIFIED_EMAIL` | почта | пусто / 0 |
-| `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ADMIN_CHAT_ID` | Telegram-бот | пусто |
-| `PAYMENTS_MOCK`, `PAYMENT_HOLD_MINUTES` | демо-оплата, время ожидания оплаты | вне production 1, 30 мин |
-| `PAYME_MERCHANT_ID`, `PAYME_KEY`, `PAYME_TEST` | Payme | пусто |
-| `CLICK_SERVICE_ID`, `CLICK_MERCHANT_ID`, `CLICK_SECRET_KEY` | Click | пусто |
-| `DELIVERY_FEE`, `FREE_DELIVERY_FROM` | доставка, сумы | 25000 / 500000 |
-| `DOMAIN` | домен для Caddy (только docker-compose) | — |
+| `PORT` | server port | 3001 |
+| `JWT_SECRET` | the session secret | is generated in `data/.jwt_secret` |
+| `JWT_EXPIRES_IN` | session duration | 7d |
+| `APP_URL` | the public address of the website | http://localhost:5173 |
+| `CORS_ORIGIN` | comma-separated allowed origin | localhost:5173 |
+| `TRUST_PROXY', `COOKIE_SECURE` | proxy operation / Secure cookies | enabled in production |
+| `TZ_OFFSET_HOURS` | time zone shift | 5 |
+| `ADMIN_EMAIL', `ADMIN_PASSWORD` | administrator account | demo outside production |
+| `DATA_DIR`, `DB_FILE', `UPLOAD_DIR`, `DIST_DIR` | paths | `server/data`, `dist` |
+| `SMTP_URL', `MAIL_FROM', `REQUIRE_VERIFIED_EMAIL` | mail | empty / 0 |
+| `TELEGRAM_BOT_TOKEN', `TELEGRAM_ADMIN_CHAT_ID` | Telegram bot | empty |
+| `PAYMENTS_MOCK`, `PAYMENT_HOLD_MINUTES` | demo payment, waiting time for payment | outside production 1, 30 min |
+| `PAYME_MERCHANT_ID', `PAYME_KEY', `PAYME_TEST` | Payme | empty |
+| `CLICK_SERVICE_ID`, `CLICK_MERCHANT_ID`, `CLICK_SECRET_KEY` | Click | empty |
+| `DELIVERY_FEE', `FREE_DELIVERY_FROM` | delivery, bags | 25000 / 500000 |
+| `DOMAIN` | domain for Caddy (docker-compose only) | — |
 
-## API (обзор)
+## API (overview)
 
-Все пути начинаются с `/api`. Проверка: `GET /api/health`.
+All paths start with `/api'. Verification: `GET /api/health'.
 
-| Группа | Пути |
+| Group | Paths |
 |---|---|
 | `/auth` | `register`, `login`, `logout`, `me` (GET/PATCH), `change-password`, `forgot-password`, `reset-password`, `verify-email`, `resend-verification` |
-| `/products` | список с фильтрами, `meta`, `suggest`, `categories`, `mine/list`, `import` и `import/template` (CSV), `:id` (GET/PUT/DELETE), `:id/related`, `:id/report` |
-| отзывы | `products/:id/reviews` (GET/POST), `reviews/:id` (PATCH/DELETE), `reviews/:id/reply` |
-| `/favorites` | список, `PUT/DELETE /:productId` |
-| `/orders` | создание и список, `:id`, `:id/cancel`, продавцу: `seller/list`, `seller/stats`, `seller/analytics`, `seller/:id/status` |
-| `/uploads` | загрузка фото (PNG/JPG/WEBP/GIF до 2 МБ) |
-| `/promos` | `validate`, `mine` (CRUD для продавца) |
-| `/payments` | `link/:orderId`, `mock/:orderId/pay`, `payme`, `click/prepare`, `click/complete` |
+| `/products` | a list with filters, `meta`, `suggest`, `categories', `mine/list`, `import` and `import/template' (CSV), `:id` (GET/PUT/DELETE), `:id/related`, `:id/report` |
+| reviews | `products/:id/reviews` (GET/POST), `reviews/:id` (PATCH/DELETE), `reviews/:id/reply` |
+| `/favorites` | list, `PUT/DELETE /:ProductID` |
+| `/orders` | creation and list, `:id`, `:id/cancel`, to seller: `seller/list`, `seller/stats`, `seller/analytics`, `seller/:id/status` |
+| `/uploads` | uploading photos (PNG/JPG/WEBP/GIF up to 2 MB) |
+| `/promos` | `validate`, `mine` (CRUD for seller) |
+| `/payments` | `link/:OrderID`, `mock/:OrderID/pay`, `payme`, `click/prepare`, `click/complete` |
 | `/admin` | `stats`, `users`, `products`, `orders` (+ `refund-done`), `reports`, `reviews`, `promos` |
-| прочее | `config`, `telegram/link-code`, `telegram/link` |
+| other | `config`, `telegram/link-code', `telegram/link` |
 
-Точные схемы и права доступа смотрите в `server/src/routes/*`.
+For the exact schemes and access rights, see `server/src/routes/*'.
 
-## Админ-панель
+## Admin Panel
 
-Вкладки зависят от роли сотрудника: **полный доступ**, **модератор** (пользователи, товары, жалобы, отзывы, чаты) и **финансист** (заказы, выплаты, выгрузки). Сотрудников создаёт админ с полным доступом во вкладке «Команда».
+The tabs depend on the employee's role: **Full access**, **moderator** (users, products, complaints, reviews, chats) and **financier** (orders, payouts, uploads). Employees are created by an admin with full access in the "Team" tab.
 
-- **Журнал** — каждое действие (блокировка, скрытие товара, смена статуса заказа, выплата, настройки, просмотр чужой переписки) пишется с автором, причиной и временем; выгрузка в CSV.
-- **Причины** — блокировка, скрытие и удаление требуют причину; она приходит продавцу или пользователю на почту/в Telegram.
-- **Модерация товаров** — режим в «Настройки»: публиковать сразу, проверять новых продавцов или все товары. «Одобрить и доверять» делает продавца проверенным.
-- **Деньги** — комиссия (общая и по категориям), баланс каждого продавца, запись выплат; всё выгружается в CSV.
-- **Массовые действия**, карточки пользователя и заказа, фильтры и сортировка во всех таблицах.
-- **Чаты** — жалобы на сообщения, просмотр переписки (фиксируется в журнале), удаление сообщений, блокировка.
-- **Безопасность** — двухфакторный вход (Google/Microsoft Authenticator) во вкладке «Безопасность». Администратору с Telegram приходят жалобы, новые товары на проверке и крупные заказы (порог в «Настройки»).
-- **Настройки** — объявление над шапкой, доставка и пункты выдачи, контакты и реквизиты — без правки `.env`.
+- **Log** — each action (blocking, hiding the product, changing the order status, payment, settings, viewing someone else's correspondence) is written with the author, reason and time; uploading to CSV.
+- **Reasons** — blocking, hiding and deleting require a reason; it is sent to the seller or user by mail / Telegram.
+- **Moderation of products** — mode in "Settings": publish immediately, check new sellers or all products. "Approve and trust" makes the seller verified.
+- **Money** — commission (total and by category), balance of each seller, record of payments; everything is uploaded to CSV.
+- **Mass actions**, user and order cards, filters and sorting in all tables.
+- **Chats** — complaints about messages, viewing correspondence (recorded in the log), deleting messages, blocking.
+- **Security** — Two-factor login (Google/Microsoft Authenticator) in the Security tab. The administrator receives complaints from Telegram, new products for verification, and large orders (the threshold is in Settings).
+- **Settings** — the ad above the header, delivery and pick-up points, contacts and banking details — without editing `.env'.
 
-## Деплой через Docker
+## Seller's account
 
-Нужны сервер с Docker, домен, DNS-запись на сервер и открытые порты 80/443.
+Tabs: **My Products**, **Orders**, **Reviews**, **Finance**, **Analytics**, **Promo Codes**, **Store**, **CSV Import**, **Notifications**.
 
-```bash
-cp .env.example .env
-# заполните DOMAIN, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD и остальное по необходимости
+- Products: calculation "you will receive" after the commission, mass actions (price in %, balance, hide, promotion), editing the price and balance directly in the table, warnings about a small balance, promotions with a deadline (the "Discounts" block on the main page), copying the product, exporting to CSV (the file can be downloaded back).
+- Orders: track number and comment to the buyer (visible in his order), invoice printing.
+- Reviews: a list marked "unanswered". Chat: quick replies and a counter for conversations waiting for a response.
+- Finance: sold, commission, paid, payable, payment history, banking details.
+- Analytics: views, favorites, shopping cart, product conversion, comparison of periods, categories.
+- Store: logo, banner, description, public page `/shop/:id' (link from the product card), "on vacation" mode (goods are hidden, return date is shown), employees without access to finances and promo codes.
+
+## Deploy via Docker
+
+We need a Docker server, a domain, a DNS record on the server, and open ports 80/443.
+
+``bash
+cp .env .example .env
+# fill in DOMAIN, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD and the rest if necessary
 docker compose up -d --build
 ```
 
-Сервис `app` собирается из `Dockerfile` (фронт собирается в первой стадии, рантайм работает от пользователя `node`, порт 3001, healthcheck на `/api/health`). Сервис `caddy` получает сертификат Let's Encrypt и проксирует трафик на `app`. Данные (SQLite, загрузки, `.jwt_secret`) лежат в томе `zetex-data` (`/app/server/data`), сертификаты — в `caddy-data`. Compose сам задаёт `NODE_ENV=production`, `TRUST_PROXY=1`, `COOKIE_SECURE=1`, `APP_URL` и `CORS_ORIGIN` из `DOMAIN`.
+The 'app` service is assembled from the `Dockerfile` (the front is assembled in the first stage, the runtime is powered by the user `node', port 3001, healthcheck on `/api/health`). The 'caddy` service receives a Let's Encrypt certificate and proxies traffic to the `app'. The data (SQLite, downloads, `.jwt_secret') is in the 'zetex-data` volume (`/app/server/data'), the certificates are in the `caddy-data`. Compose itself sets `NODE_ENV=production`, `TRUST_PROXY=1`, `COOKIE_SECURE=1`, `APP_URL` and `CORS_ORIGIN` from `DOMAIN`.
 
-Обновление: `git pull && docker compose up -d --build`.
+Update: `git pull && docker compose up -d --build'.
 
-## Деплой без Docker
+## Deploy without Docker
 
 ```bash
 npm ci && npm run build
@@ -120,41 +130,11 @@ NODE_ENV=production PORT=3001 JWT_SECRET=... ADMIN_EMAIL=... ADMIN_PASSWORD=... 
   APP_URL=https://your.domain npm start
 ```
 
-Express сам раздаёт `dist/`. Перед ним поставьте nginx или Caddy с HTTPS (cookie в production помечаются Secure) и запускайте процесс под systemd/pm2.
+Express distributes the 'dist/` itself. Put nginx or Caddy with HTTPS in front of it (cookies in production are marked Secure) and run the process under systemd/pm2.
 
-## Бэкапы SQLite
+## SQLite Backups
 
-Всё состояние лежит в каталоге данных (`server/data/`, в Docker — том `zetex-data`): `zetex.db`, `uploads/`, `.jwt_secret`.
+The entire state is in the data directory (`server/data/`, in the Docker volume `zetex—data`): `zetex.db`, `uploads/`, `.jwt_secret'.
 
-- Горячая копия базы: `sqlite3 server/data/zetex.db ".backup 'backup.db'"`.
-- Копирование каталога при остановленном сервисе: `docker compose stop app`, затем копия `data/` (в Docker, например, `docker run --rm -v zetex-market_zetex-data:/d -v $PWD:/b alpine tar czf /b/data.tgz -C /d .`; имя тома зависит от имени проекта, проверьте `docker volume ls`), затем `docker compose start app`.
-- Копируйте и `uploads/`, иначе фото товаров пропадут. Периодически проверяйте восстановление.
-
-## Тесты
-
-```bash
-npm test                  # из корня: тесты API (то же, что cd server && npm test)
-npm run test:e2e          # сквозные тесты; скрипт добавляется отдельно и может отсутствовать в вашей версии
-npm run lint && npm run build
-```
-
-CI (`.github/workflows/ci.yml`) на Node 22 ставит зависимости, запускает lint, сборку и тесты сервера.
-
-## Что нужно знать перед боевым запуском
-
-Проект рабочий, но это не «включил и принимай деньги». Честно о том, чего нет или что не проверено:
-
-- **Payme** написан по протоколу, но не проверен в тестовой среде Payme. **Click** сверен с документацией, но тоже требует проверки с реальным кабинетом. Нужны реальные ключи мерчантов (`PAYME_*`, `CLICK_*`); пройдите тестовые сценарии провайдеров до приёма настоящих платежей.
-- В production `PAYMENTS_MOCK` должен быть `0`, иначе демо-оплата не должна использоваться для реальных заказов.
-- **Пункты выдачи** по умолчанию — примеры. Задайте свои через `PICKUP_POINTS` (JSON, см. `.env.example`) или в `server/src/delivery.js`.
-- **SQLite** подходит для одного сервера. Для горизонтального масштабирования нужен Postgres — это не реализовано.
-- **Загрузки** хранятся на диске сервера. Хранилище S3 не реализовано; делайте бэкапы `uploads/`.
-- **Почта** работает только при заданном `SMTP_URL`; без него письма (подтверждение, сброс пароля) не уходят, а при `REQUIRE_VERIFIED_EMAIL=1` покупатели не смогут оформлять заказы.
-- **Telegram** работает только при `TELEGRAM_BOT_TOKEN`.
-- **Чат** без модерации и без WebSocket: нет фильтра спама и жалоб на сообщения, администратор переписки не видит. При росте нагрузки опрос лучше заменить на WebSocket/SSE.
-- **Узбекский перевод** машинный/черновой, нужна вычитка носителем языка.
-- **Юридические тексты** в `src/legal/content.js` — рабочий шаблон для типового маркетплейса, а не юридическое заключение. Перед запуском их должен проверить юрист: реквизиты (`COMPANY_*`, `SUPPORT_*`), срок возврата, перечень товаров, не подлежащих возврату, условия для продавцов (комиссия, выплаты), требования к хранению персональных данных граждан Узбекистана. Тексты только на русском. Удаление аккаунта и выгрузка данных реализованы кнопками в профиле; обезличивание описано в тексте политики — сверьте его с требованиями закона.
-- **SEO**: задайте `APP_URL` (адрес сайта без `/` в конце) — по нему строятся canonical, Open Graph и sitemap. Шаблон `index.html` перечитывается автоматически после новой сборки. Рендеринг страниц остаётся клиентским: поисковики и соцсети получают мета-теги и структурированные данные, но не полный HTML каталога.
-- В production демо-аккаунты не создаются (если не задан `SEED_DEMO=1`), поэтому каталог в начале пуст: войдите администратором и заведите продавцов или зарегистрируйте их через сайт. Задайте свой `JWT_SECRET`, `ADMIN_EMAIL` и `ADMIN_PASSWORD`.
-- Сборка Docker-образа и `docker compose` в момент написания этой документации не прогонялись.
-# zetex-market
+- Hot copy of the database: `sqlite3 server/data/zetex.db'.backup 'backup.db'"`.
+- Copying the catalog when the service is stopped: `docker compose stop app', then a copy of `data/` (in Docker, for example, `docker run --rm -v zetex-market_zetex-data:/d -v $PWD:/b alpine tar czf /b/data.tgz -C/d .`; the volume name depends on the project name, check `docker volume ls'), then `docker compose start app'.
